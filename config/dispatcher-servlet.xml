@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+    <mvc:annotation-driven/>
+
+    <!--只扫描controller package-->
+    <context:component-scan base-package="user">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <mvc:default-servlet-handler/>
+
+    <bean id = "view" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="suffix" value="/"></property>
+        <property name="prefix" value=".jsp"></property>
+    </bean>
+
+    <!--<beans:bean-->
+            <!--class="org.springframework.web.servlet.view.InternalResourceViewResolver"-->
+            <!--p:prefix="/page/" p:suffix=".jsp">-->
+    <!--</beans:bean>-->
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="540000"></property>
+        <property name="resolveLazily" value="true"></property>
+    </bean>
+
+
+</beans>

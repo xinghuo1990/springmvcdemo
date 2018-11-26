@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="user.dao.UserDao">
+    <resultMap id="user" type="user.dto.UserDto">
+        <result property="name" column="user_name" jdbcType="VARCHAR"></result>
+        <result property="sex" column="user_sex" jdbcType="VARCHAR"></result>
+    </resultMap>
+
+    <insert id="saveUser" parameterType="UserDto">
+        insert into user_test (
+            user_name,
+            user_sex)
+        values (
+           #{name},
+           #{sex}
+        )
+    </insert>
+
+    <select id="queryUserByMap" parameterType="HashMap" resultMap="user">
+        select * from user_test u where u.user_name
+                                        = #{dto.name}
+    </select>
+</mapper>
